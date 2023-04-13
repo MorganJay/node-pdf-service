@@ -1,0 +1,14 @@
+{
+  "amount": "4,000.00",
+  "beneficiaryName": "John Smith",
+  "beneficiaryAccount": "FCL/232932903",
+  "senderName": "Angela Smith",
+  "senderAccount": "Gtbank/2324291301",
+  "date": "today o",
+  "time": "09:32 pm",
+  "fee": "100.00",
+  "description": "A big amount of money",
+  "reference": "24322143543234342",
+  "transType": "Internet",
+  "status": "Successful"
+}
