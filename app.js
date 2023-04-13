@@ -2,7 +2,6 @@ const fs = require('fs');
 const express = require('express');
 const bodyParser = require('body-parser');
 const data = require('./data.json');
-const path = require('path');
 
 const app = express();
 const port = 3000;
@@ -72,7 +71,7 @@ app.get('/api/receipt', (_, res) => {
       console.log('done');
     } catch (error) {
       console.log('An error occurred: ', error);
-      res.status(400).send(null);
+      res.status(400).send({ message: 'An unexpected error occurred' });
     }
   })();
 });
@@ -140,7 +139,7 @@ app.post('/api/transaction-receipt', (req, res) => {
       process.exit();
     } catch (error) {
       console.log('An error occurred: ', error);
-      res.status(400).send(null);
+      res.status(400).send({ message: 'An unexpected error occurred' });
     }
   })();
 });
