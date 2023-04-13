@@ -49,26 +49,31 @@ app.get('/api/receipt', (_, res) => {
   const puppeteer = require('puppeteer');
 
   (async () => {
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-    await page.setContent(htmlReadyToRender);
-    await page.emulateMediaType('screen');
-    const pdf = await page.pdf({
-      printBackground: true,
-      scale: 1,
-      format: 'A4',
-      margin: { top: '130px' },
-    });
-    await browser.close();
+    try {
+      const browser = await puppeteer.launch();
+      const page = await browser.newPage();
+      await page.setContent(htmlReadyToRender);
+      await page.emulateMediaType('screen');
+      const pdf = await page.pdf({
+        printBackground: true,
+        scale: 1,
+        format: 'A4',
+        margin: { top: '130px' },
+      });
+      await browser.close();
 
-    // Set the response headers to indicate that the response is a PDF file
-    const fileName = `FCL_Transaction_Receipt_${new Date().getTime()}.pdf`;
-    res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Content-Disposition', `attachment; filename=${fileName}`);
+      // Set the response headers to indicate that the response is a PDF file
+      const fileName = `FCL_Transaction_Receipt_${new Date().getTime()}.pdf`;
+      res.setHeader('Content-Type', 'application/pdf');
+      res.setHeader('Content-Disposition', `attachment; filename=${fileName}`);
 
-    // Return the PDF in the response
-    res.send(pdf);
-    console.log('done');
+      // Return the PDF in the response
+      res.send(pdf);
+      console.log('done');
+    } catch (error) {
+      console.log('An error occurred: ', error);
+      res.status(400).send(null);
+    }
   })();
 });
 
@@ -119,7 +124,7 @@ app.post('/api/transaction-receipt', (req, res) => {
         printBackground: true,
         scale: 1,
         format: 'A4',
-        margin: { left: '50px', right: '50px' },
+        margin: { top: '130px' },
       });
 
       console.log('done');
@@ -135,7 +140,7 @@ app.post('/api/transaction-receipt', (req, res) => {
       process.exit();
     } catch (error) {
       console.log('An error occurred: ', error);
-      res.send(null);
+      res.status(400).send(null);
     }
   })();
 });

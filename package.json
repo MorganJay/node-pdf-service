@@ -7,8 +7,12 @@
     "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "node",
+    "pdf",
+    "express"
+  ],
+  "author": "Oluwatofunmi James Morgan",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.2",
