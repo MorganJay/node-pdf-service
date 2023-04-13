@@ -10,7 +10,11 @@ const port = 3000;
 // parse application/json
 app.use(bodyParser.json());
 
-app.get('/api/receipt', (req, res) => {
+app.get('/', (_, res) => {
+  res.send('Hello, world');
+});
+
+app.get('/api/receipt', (_, res) => {
   const html = fs.readFileSync('./receipt.html', 'utf-8');
 
   const {
